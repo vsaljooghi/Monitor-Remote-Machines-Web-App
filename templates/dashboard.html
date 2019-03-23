@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+ {% block headcontent %}
+   <title>Monitor Remote Servers</title>
+   <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/main.css') }}>
+   <meta charset="utf-8">
+   <script type="text/javascript" src={{ url_for('static', filename='js/date_time.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/d3.min.js') }} ></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/jquery-3.3.1.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/socket.io.dev.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/heartbeat.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/radial-axis.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/CPU_gauge.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/RAM_gauge.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/storage_gauge.js') }}></script>
+   <script type="text/javascript" src={{ url_for('static', filename='js/indicator_light.js') }}></script>
+ {% endblock headcontent %}
+    
+ {% block bodycontent %}  
+    <header>
+      <p id="title">Monitoring Remote Servers</p>
+
+      <div id="ShaparakLogo">       
+        <img src={{ url_for('static', filename='img/shaparak.png') }} alt="Shaparak logo"/>
+      </div>
+    </header>
+
+  {% set myheader = namespace(header=[]) %}
+  <div id="table-wrapper">   
+    <div class="flex-container">
+      <div class="flex-container"><div>Sitad:</div><div id="Sitad"></div></div>
+      <div class="flex-container"><div>Post:</div><div id="Post"></div></div>
+      <div class="flex-container"><div>Civil:</div><div id="Civil"></div></div>
+      <div class="flex-container"><div>Transactions:</div><div id="TRANS"></div></div>
+      <div class="flex-container"><div>NTP:</div><div id="NTP"></div></div>
+    </div>
+
+    <table>
+      <tbody>
+        <tr>
+         {% for i in range(0,2) %}
+           <td>
+
+             <table class="ResrcTable">
+               <thead>
+                 <tr>
+                  {% for ResrcName in MyTableStructure[0] %}
+                    <th>{{ ResrcName }}</th>
+                    {% set myheader.header=MyTableStructure[0] %}
+                  {% endfor %}
+                 </tr>
+               </thead>
+            
+               <tbody>
+                 {% for row in MyTableStructure[i*7+1:(i+1)*7+1] %}
+                   <tr>
+                    {%set myserver_name = namespace(server_name='') %}
+                    {% for colm in row %}
+                      {% if loop.index0 == 0 %}
+                        <td class="row_head">{{ colm }}</td>
+                        {%set myserver_name.server_name=colm %}
+                      {% else %}
+                         <td id="{{ myserver_name.server_name + "_" + myheader.header[loop.index0] }}"></td>
+                      {% endif %}
+                    {% endfor %}
+                   </tr>
+                 {% endfor %}
+               </tbody>
+             </table>
+
+           </td>    
+         {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+  </div> <!-- #table-wrapper -->
+    
+  <footer>
+     <div id="Copyright">
+       <pre>Published Jan. 2019 <br />&copy; Copyright Shaparak Co.</pre>
+     </div>
+
+     <div id="Info"></div>
+  </footer>
+
+  <script type="text/javascript">window.onload = date_time('Info');</script>
+  <script type="text/javascript">
+     var Objs_Dict = {};
+       
+      {% for item in ["Sitad","Post","Civil","TRANS","NTP"] %} 
+        Objs_Dict["{{item}}"] = new indicator_light("#" + "{{item}}");
+        Objs_Dict["{{item}}"].drawIndicatorLight();
+      {% endfor %}
+
+      {% for row in MyTableStructure %}
+       {% if loop.index0 != 0 %}
+         {%set myserver = namespace(server='') %}
+         {% for colm in row %}
+           {% if loop.index0 == 0 %}
+             {%set myserver.server = colm %}
+           {% else %}
+              {% if myheader.header[loop.index0] == "heartbeat" %}
+                {%set id = myserver.server + "_" + "heartbeat" %}
+                {% if colm == "T" %}
+                  Objs_Dict["{{id}}"] = new HB(false,"#" + "{{id}}", 5000);
+                  Objs_Dict["{{id}}"].drawHB();
+                  setInterval(function () {Objs_Dict["{{id}}"].updateHB();},  Objs_Dict["{{id}}"].HB_interval/2); 
+                {% elif colm == "F" %}
+                  $("#"+"{{id}}").append('N.A.');
+                {% endif %}
+              {% elif myheader.header[loop.index0] == "CPU" %}
+                {%set id= myserver.server + "_" + "CPU" %}
+                {% if colm == "T" %}
+                  Objs_Dict["{{id}}"] = new CPU_gauge("#" + "{{id}}");
+                  Objs_Dict["{{id}}"].drawCPU_gauge();
+                {% elif colm == "F" %}
+                  $("#" + "{{id}}").append('N.A.');
+                {% endif %}
+              {% elif myheader.header[loop.index0] == "Storage" %}
+                {%set id= myserver.server + "_" + "Storage" %}
+                {% if colm == "T" %}
+                  Objs_Dict["{{id}}"] = new storage_gauge("#" + "{{id}}");
+                  Objs_Dict["{{id}}"].drawStorage_gauge();
+                {% elif colm == "F" %}
+                  $("#"+"{{id}}").append('N.A.');
+                {% endif %}
+              {% elif myheader.header[loop.index0] == "RAM" %}
+                {%set id= myserver.server + "_" + "RAM" %}
+                {% if colm == "T" %}
+                  Objs_Dict["{{id}}"] = new RAM_gauge("#" + "{{id}}");
+                  Objs_Dict["{{id}}"].drawRAM_gauge();
+                {% elif colm == "F" %}
+                  $("#"+"{{id}}").append('N.A.');
+                {% endif %}
+              {% endif %}
+           {% endif %}
+         {% endfor %}
+       {% endif %}
+      {% endfor %}
+  </script>
+
+  <script type="text/javascript" src={{ url_for('static', filename='js/WebSocketEventHandler.js') }}></script>
+
+ {% endblock bodycontent %}

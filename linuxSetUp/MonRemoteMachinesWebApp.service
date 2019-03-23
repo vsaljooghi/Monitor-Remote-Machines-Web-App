@@ -1,0 +1,16 @@
+
+[Unit]
+Description=web application for  monitoring centralized remote servers logs
+After=syslog.target network.target
+
+[Service]
+ExecStart=/opt/anaconda/anaconda3/bin/python3.7 /usr/local/sbin/Monitoring/MonRemoteMachinesWebApp.py
+User=root
+Group=root
+Environment=PYTHONPATH=/usr/local/lib/python3.7/site-packages
+
+[Install]
+WantedBy=multi-user.target
+
+
+ 

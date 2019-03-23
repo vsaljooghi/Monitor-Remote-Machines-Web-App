@@ -1,0 +1,136 @@
+html {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+}
+
+body {
+   font: 16px Times New Roman, Arial, Helvetica, sans-serif;
+   height: 100%;
+}
+	
+header {
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   width: 100%;
+   height: 80px;
+   background-image:linear-gradient(to right, blue, white);
+   border-bottom: 15px solid #0e6cb1;
+   color: white;
+   border-radius: 10px;
+}
+
+#title{
+   float:left;
+   font: bold 25px Times New Roman, Arial, Helvetica, sans-serif;
+   text-align: center;
+   margin: 25px 10px;
+}
+
+#ShaparakLogo {
+   float: right;
+   margin: 0px 5px;
+   width: 160px;
+   height: 80px;
+}
+
+img {
+   max-width: 100%;
+   max-height: 100%;
+   border-radius: 5px;
+}
+
+#table-wrapper {
+   border-radius: 10px;
+   border: 1px solid #000000;
+   padding: 10px; 
+   box-shadow: 5px 5px #bbbbbb;
+   position: fixed;
+   bottom: 75px;
+   top: 100px;
+   left: 10px;
+   right: 20px;
+   overflow: auto;  
+}
+
+.flex-container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+}
+
+.flex-container > div {
+   text-align: center;
+   vertical-align: middle;
+   font-size: 20px;
+   font-weight: bold;
+   height: 35px;
+} 
+
+table {
+   width: 100%;
+   height: 100%;
+   border-collapse: collapse; 
+}
+
+th {
+   padding: 0px  5px;
+   color: black;
+   background-color: #42d4f4;
+   font-weight: bold;
+   word-break: normal;
+}
+
+tr th:first-child {
+   border-radius: 5px 0px 0px 5px;
+}
+
+tr th:last-child {
+   border-radius: 0px 5px 5px 0px;
+}
+
+.ResrcTable tr:nth-child(even){background-color:#dbf6fc;}
+
+tr td:first-child {
+   border-radius: 5px 0px 0px 5px;
+}
+
+tr td:last-child {
+   border-radius: 0px 5px 5px 0px;
+}
+
+td {
+   padding: 0px 5px;  
+   word-break: normal;
+   text-align: center; 
+}
+
+footer {
+   width: 100%;
+   height: 50px;
+   background-image:linear-gradient(to bottom right, blue, white);   
+   border-top: 15px solid #0e6cb1;
+   color: white;
+   border-radius: 10px;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+}
+
+#Copyright {
+   font-size: 12px;
+   float: left;
+   margin: 5px 10px;
+}
+
+#Info {
+   border-top: 10px solid #808080;
+   background: #000000;
+   color: green;
+   padding: 5px 10px;
+   margin: 5px 10px;
+   float: right;
+   font-weight: bold;
+   border-radius: 5px;
+}

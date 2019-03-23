@@ -1,0 +1,18 @@
+[	
+  ["ManagedNodes",	"heartbeat"	,	"CPU"		,	"Storage"	,	"RAM"	],
+
+  ["OPMMS-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPMMS-02"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPMMS-03"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPMMS-04"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPMMSDB-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPMMSDB-02"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPTDB-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPDWH-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPMMSGRD-01" ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPBIDWH-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPBIAPP-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPIMS-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["OPSTSC-01"	 ,	"T"		,       "T"		,	"T"		, 	"T"	],
+  ["MORIDVAS"	 ,	"T"		,       "T"		,	"T"		, 	"T"	]
+]
