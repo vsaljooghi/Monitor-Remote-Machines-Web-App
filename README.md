@@ -9,7 +9,7 @@ The web application is sitting waiting to receive a change in log files (Web App
 ![Screen Shot](https://raw.githubusercontent.com/vsaljooghi/Monitor-Remote-Machines-Web-App/master/demo/Dashboard.png)
 
 
-```text
+
 <p dir='rtl' align='right'>
 چهارده سرور به یک سرور مرکزی تجمیع لاگ وصلند و وب اپلیکیشن پایتون روی این سرور اجرا می شود. پیام هایی که از سرورهای راه دور به سرور مرکزی از طریق rsyslog می رسند پردازش شده و در نهایت از طریق پیام های وب سوکت بر روی مرورگر (User Agent) به صورت مصور(SVG) و بلادرنگ (real time) نمایش داده می شوند. 
 
@@ -17,4 +17,4 @@ The web application is sitting waiting to receive a change in log files (Web App
 
 به این ترتیب می شه هر موضوعی رو مانیتور کرد. کافیه  پیام مورد نظر از سرور راه دور برسه به سرور مرکزی و مصورسازی متناظرش تعریف شود.
 </p>
-```
+
